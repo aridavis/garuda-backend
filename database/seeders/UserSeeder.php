@@ -70,6 +70,8 @@ class UserSeeder extends Seeder
             $user->company_id = $s["company_id"];
             $user->email = $s["email"];
             $user->password = bcrypt("password");
+            $user->dob = $s["dob"];
+            $user->phone = $s["phone"];
             $user->role_id = 1;
             $user->save();
         }
@@ -163,6 +165,8 @@ class UserSeeder extends Seeder
             $user->email = $s["email"];
             $user->password = bcrypt("password");
             $user->role_id = 1;
+            $user->dob = $s["dob"];
+            $user->phone = $s["phone"];
             $user->save();
         }
     }
