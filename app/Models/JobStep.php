@@ -9,4 +9,11 @@ class JobStep extends Model
 {
     use HasFactory;
 
+    public function job(){
+        return $this->hasMany(Job::class);
+    }
+
+    public function step(){
+        return $this->belongsTo(Step::class);
+    }
 }

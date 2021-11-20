@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ApplicationProcess extends Model
 {
     use HasFactory;
+
+    public function jobStep(){
+        return $this->belongsTo(JobStep::class);
+    }
 }

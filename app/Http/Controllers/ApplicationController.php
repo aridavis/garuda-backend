@@ -16,7 +16,13 @@ class ApplicationController extends Controller
         $data = new Application();
         $data = $data->newQuery();
         $data = $data->where('user_id','=', $request->user()->id);
-        return ResponseGenerator::PaginationResponse($data, $request);
+        $data = $data->with('job.company');
+        $data = $data->get();
+        foreach ($data as $d){
+            $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at')->get();
+            $d->last_progress = sizeof($notNull) == 0 ? ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->get()[0] : $notNull[0];
+        }
+        return ResponseGenerator::ListResponse($data, $request);
     }
 
     public function store(Request $request){
@@ -28,7 +34,7 @@ class ApplicationController extends Controller
         $jobSteps = JobStep::where('job_id', '=', $request->job_id)->get();
         foreach ($jobSteps as $j){
             $p = new ApplicationProcess();
-            $p->job_step_id = $j;
+            $p->job_step_id = $j->id;
             $p->order = $j->order;
             $p->application_id = $data->id;
 
