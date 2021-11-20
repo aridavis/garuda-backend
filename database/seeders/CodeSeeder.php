@@ -51,7 +51,7 @@ ICAjICAjCiMgICAgICAjICMKIyAgICAgICAjIwojIyMjIyMjIyMj",
     public function htmls()
     {
         return [
-            `<h1 id="who-am-i-calling">Who Am I Calling</h1>
+            '<h1 id="who-am-i-calling">Who Am I Calling</h1>
 <h2 id="introduction">Introduction</h2>
 <p>A big company usually has a phone with lots of extensions. Sometimes, when we call them, they will redirect us to another extensions. And now, we want to know which extension are we calling</p>
 <h2 id="input">Input</h2>
@@ -75,8 +75,8 @@ ICAjICAjCiMgICAgICAjICMKIyAgICAgICAjIwojIyMjIyMjIyMj",
 <pre>
 Case #1: 4
 </pre>
-`,
-            `<h1 id="can-meet-">Can Meet?</h1>
+',
+            '<h1 id="can-meet-">Can Meet?</h1>
 <h2 id="introduction">Introduction</h2>
 <p><img src="image/maze.png" alt="Maze"></p>
 <p>A maze is a path or collection of paths, typically from an entrance to a goal (Wikipedia). Tutu wants to check if a start point can reach the end point. But he is too lazy to use his eyes, so decides to make a program to solve the problem.</p>
@@ -125,8 +125,8 @@ Case #1: YES
 Case #2: YES
 Case #3: NO
 </pre>
-`,
-            `<h1 id="prime-numbers">Prime Numbers</h1>
+',
+            '<h1 id="prime-numbers">Prime Numbers</h1>
 <h2 id="introduction">Introduction</h2>
 <p>One day, Tata told Tutu a story about prime number and we don&#39;t know what Tata told him. A few days later, Tutu told you the story but you understand nothing. At school, Tutu has learnt about prime numbers between 1 and 100 (I believe, you had learnt it before at elementary school). But Tutu wants to know more prime numbers. Instead of calculate in on paper, it is better for you to make a program to know the prime numbers between 2 numbers.</p>
 <h2 id="inputs">Inputs</h2>
@@ -152,7 +152,7 @@ a &lt;= <em>b</em> &lt;= 10000<br></p>
 </tr>
 </tbody>
 </table>
-`
+'
         ];
     }
 }
