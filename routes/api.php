@@ -43,6 +43,7 @@ Route::middleware('auth:api')->group(function(){
 
     Route::prefix('codes')->group(function(){
         Route::get('/', [\App\Http\Controllers\CodeController::class, 'index']);
+        Route::get('/{id}', [\App\Http\Controllers\CodeController::class, 'show']);
         Route::post('submit', [\App\Http\Controllers\CodeController::class, 'submit']);
     });
 

@@ -14,6 +14,10 @@ class CodeController extends Controller
         return ResponseGenerator::ListResponse(CPQuestion::all());
     }
 
+    public function show(Request  $id){
+        return ResponseGenerator::SingleResponse(CPQuestion::find($id));
+    }
+
     public function submit(Request $request)
     {
         $question = CPQuestion::find($request->question_id);

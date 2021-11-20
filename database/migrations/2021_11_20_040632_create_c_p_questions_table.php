@@ -15,7 +15,8 @@ class CreateCPQuestionsTable extends Migration
     {
         Schema::create('c_p_questions', function (Blueprint $table) {
             $table->id();
-            $table->longText('md');
+            $table->string('name');
+            $table->longText('html');
             $table->longText('input');
             $table->longText('expected_output');
             $table->timestamps();
