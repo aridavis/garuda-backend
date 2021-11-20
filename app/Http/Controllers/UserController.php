@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ResponseGenerator;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,12 +19,10 @@ class UserController extends Controller
             "city" => "required",
             "address" => "required",
             "state" => "required",
-            "zip" => "required",
             "phone" => "required",
             "dob" => "required",
             "interest" => "required",
-            "company_id" => "required",
-            "email" => "required",
+            "email" => "required|email",
             "password" => "required"
         ]);
 
@@ -39,9 +38,8 @@ class UserController extends Controller
         $user->city = $request->city;
         $user->address = $request->address;
         $user->state = $request->state;
-        $user->zip = $request->zip;
         $user->phone = $request->phone;
-        $user->dob = $request->dob;
+        $user->dob = Carbon::parse($request->dob)->setTimezone('Asia/Jakarta');
         $user->interest = $request->interest;
         $user->company_id = $request->company_id;
         $user->email = $request->email;
