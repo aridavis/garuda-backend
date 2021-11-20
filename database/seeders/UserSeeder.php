@@ -65,7 +65,6 @@ class UserSeeder extends Seeder
             $user->city = $s["city"];
             $user->address = $s["address"];
             $user->state = $s["state"];
-            $user->zip = $s["zip"];
             $user->interest = $s["interest"];
             $user->company_id = $s["company_id"];
             $user->email = $s["email"];
@@ -159,7 +158,6 @@ class UserSeeder extends Seeder
             $user->city = $s["city"];
             $user->address = $s["address"];
             $user->state = $s["state"];
-            $user->zip = $s["zip"];
             $user->interest = $s["interest"];
             $user->company_id = $s["company_id"];
             $user->email = $s["email"];

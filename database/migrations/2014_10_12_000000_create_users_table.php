@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('state');
-            $table->string('zip');
             $table->string('phone');
             $table->string('dob');
             $table->string('interest')->nullable();
