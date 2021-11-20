@@ -44,6 +44,10 @@ Route::middleware('auth:api')->group(function(){
     Route::prefix('basic-questions')->group(function(){
         Route::get('/',  [\App\Http\Controllers\BasicQuestionController::class, 'index']);
     });
+
+    Route::prefix('users')->group(function(){
+        Route::post("jobseeker", [\App\Http\Controllers\UserController::class, 'registerJobseeker']);
+    });
 });
 
 Route::prefix('codes')->group(function(){
