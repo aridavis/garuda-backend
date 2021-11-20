@@ -81,24 +81,24 @@ class UserSeeder extends Seeder
         $companies =
             [
                 [
-                    "name" => "Bliped",
+                    "name" => "Tokopedia",
                     "country" => "Indonesia",
                     "city" => "Jakarta",
-                    "state" => "Jakarta Pusat",
-                    "address" => "Gedung sarana Jaya Jl. Budi Kemuliaan I no. 1, RT.2/RW.3, Gambir",
-                    "zip" => "10110",
-                    "image_url" => "https://www.taxmann.com/post/wp-content/uploads/2021/04/company-concept-illustration_114360-2581.jpg",
+                    "state" => "Jakarta Selatan",
+                    "address" => " Jl. Prof. DR. Satrio No.3, Karet Semanggi, Kecamatan Setiabudi",
+                    "zip" => "12950",
+                    "image_url" => "https://assets.tokopedia.net/assets-tokopedia-lite/v2/arael/kratos/36c1015e.png",
                     "category" => "Technology",
                 ],
                 [
-                    "name" => "Delit",
+                    "name" => "Tiket",
                     "country" => "Indonesia",
                     "city" => "Jakarta",
                     "state" => "Jakarta Pusat",
-                    "address" => "The Plaza Office Tower, 32nd Floor, Jl. M.H. Thamrin Kav 28-30, RT.9/RW.5",
-                    "image_url" => "https://1office.co/sweden/wp-content/uploads/sites/13/2019/04/Register-Cleaning-Company-in-Singapore-e1594811625197.jpg",
-                    "zip" => "10350",
-                    "category" => "Consulting",
+                    "address" => "Gedung Graha Niaga Thamrin, Jl. K.H. Mas Mansyur, RT.2/RW.8, Kb. Melati, Kecamatan Tanah Abang",
+                    "image_url" => "https://m.tiket.com/home-ms-v4/assets/Icon-200.png",
+                    "zip" => "12980",
+                    "category" => "Technology",
                 ]
             ];
         foreach ($companies as $s) {

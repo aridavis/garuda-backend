@@ -18,11 +18,10 @@ class CreateJobsTable extends Migration
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->on('companies')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('description');
+            $table->longText('description');
             $table->string('category');
             $table->integer('pay_range')->default(0);
             $table->string('country');
-            $table->string('state');
             $table->string('city');
             $table->date('open');
             $table->date('close');

@@ -13,7 +13,7 @@ class JobController extends Controller
     public function index(Request $request){
         $data = new Job();
         $data = $data->newQuery();
-
+        $data = $data->with('company');
         return ResponseGenerator::PaginationResponse($data, $request);
     }
 

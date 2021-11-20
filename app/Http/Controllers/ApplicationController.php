@@ -29,12 +29,12 @@ class ApplicationController extends Controller
         foreach ($jobSteps as $j){
             $p = new ApplicationProcess();
             $p->job_step_id = $j;
-            $p->order = $jobSteps->order;
+            $p->order = $j->order;
             $p->application_id = $data->id;
 
-            if($jobSteps->meeting_type_id != null){
+            if($j->meeting_type_id != null){
                 $meeting = new Meeting();
-                $meeting->meeting_type_id = $jobSteps->meeting_type_id;
+                $meeting->meeting_type_id = $j->meeting_type_id;
                 $meeting->save();
                 $p->meeting_id = $meeting->id;
             } else {
