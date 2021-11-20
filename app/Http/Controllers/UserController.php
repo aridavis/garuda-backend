@@ -28,7 +28,7 @@ class UserController extends Controller
         ]);
 
         if($validator->fails()){
-            ResponseGenerator::FormikError($validator->errors());
+            return ResponseGenerator::FormikError($validator->errors());
         }
 
         $user = new User();
