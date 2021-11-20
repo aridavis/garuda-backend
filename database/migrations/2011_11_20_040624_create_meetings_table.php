@@ -17,8 +17,8 @@ class CreateMeetingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('meeting_type_id');
             $table->foreign('meeting_type_id')->on('meeting_types')->references('id')->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('started');
-            $table->string('socket_id');
+            $table->boolean('started')->default(false);
+            $table->string('socket_id')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Meeting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MeetingTypeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CodeSeeder::class);
+
+        $meet = new Meeting();
+        $meet->meeting_type_id = 1;
+        $meet->save();
     }
 }
