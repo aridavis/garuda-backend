@@ -162,7 +162,7 @@ class UserSeeder extends Seeder
             $user->company_id = $s["company_id"];
             $user->email = $s["email"];
             $user->password = bcrypt("password");
-            $user->role_id = 1;
+            $user->role_id = 2;
             $user->dob = $s["dob"];
             $user->phone = $s["phone"];
             $user->save();
