@@ -41,13 +41,13 @@ Route::middleware('auth:api')->group(function(){
         Route::post('store', [\App\Http\Controllers\JobController::class, 'store']);
     });
 
-    Route::prefix('codes')->group(function(){
-        Route::get('/', [\App\Http\Controllers\CodeController::class, 'index']);
-        Route::get('/{id}', [\App\Http\Controllers\CodeController::class, 'show']);
-        Route::post('submit', [\App\Http\Controllers\CodeController::class, 'submit']);
-    });
-
     Route::prefix('basic-questions')->group(function(){
         Route::get('/',  [\App\Http\Controllers\BasicQuestionController::class, 'index']);
     });
+});
+
+Route::prefix('codes')->group(function(){
+    Route::get('/', [\App\Http\Controllers\CodeController::class, 'index']);
+    Route::get('/{id}', [\App\Http\Controllers\CodeController::class, 'show']);
+    Route::post('submit', [\App\Http\Controllers\CodeController::class, 'submit']);
 });
