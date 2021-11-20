@@ -21,7 +21,6 @@ class UserController extends Controller
             "state" => "required",
             "phone" => "required",
             "dob" => "required",
-            "interest" => "required",
             "email" => "required|email",
             "password" => "required"
         ]);
@@ -40,7 +39,6 @@ class UserController extends Controller
         $user->state = $request->state;
         $user->phone = $request->phone;
         $user->dob = Carbon::parse($request->dob)->setTimezone('Asia/Jakarta');
-        $user->interest = $request->interest;
         $user->company_id = $request->company_id;
         $user->email = $request->email;
         $user->password = $request->password;

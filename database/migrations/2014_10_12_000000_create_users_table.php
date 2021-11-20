@@ -24,15 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('phone');
             $table->string('dob');
-            $table->string('interest')->nullable();
             $table->string('company_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->on('roles')->references('id')->onUpdate('cascade')->onDelete('cascade');
-
-
             $table->rememberToken();
             $table->timestamps();
         });
