@@ -15,6 +15,8 @@ class CreateApplicationProcessesTable extends Migration
     {
         Schema::create('application_processes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('job_step_id');
+            $table->foreign('job_step_id')->on('job_steps')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('application_id');
             $table->foreign('application_id')->on('applications')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('meeting_id')->nullable();
@@ -22,8 +24,8 @@ class CreateApplicationProcessesTable extends Migration
             $table->unsignedBigInteger('basic_test_id')->nullable();
             $table->foreign('basic_test_id')->on('basic_tests')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('order');
-            $table->string('result');
-            $table->boolean('pass');
+            $table->string('result')->nullable();
+            $table->boolean('pass')->default(false);
             $table->timestamps();
         });
     }
