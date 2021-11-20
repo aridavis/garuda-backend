@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('state');
             $table->string('zip');
+            $table->string('phone');
+            $table->string('dob');
             $table->string('interest')->nullable();
             $table->string('company_id')->nullable();
             $table->string('email')->unique();

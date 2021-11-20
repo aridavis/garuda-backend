@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
@@ -35,7 +36,9 @@ class UserSeeder extends Seeder
                 "zip" => "10110",
                 "interest" => "System Analyst",
                 "company_id" => null,
-                "email" => "angelia@gmail.com"
+                "email" => "angelia@gmail.com",
+                "dob" => Carbon::today()->addYears(-20),
+                "phone" => "02321312123"
             ],
             [
                 "first_name" => "Rafael",
@@ -48,7 +51,9 @@ class UserSeeder extends Seeder
                 "zip" => "10110",
                 "interest" => "Software Engineering",
                 "company_id" => null,
-                "email" => "rafael@gmail.com"
+                "email" => "rafael@gmail.com",
+                "dob" => Carbon::today()->addYears(-20),
+                "phone" => "02321912123"
             ],
         ];
         foreach ($users as $s) {
@@ -123,7 +128,9 @@ class UserSeeder extends Seeder
                 "zip" => "10110",
                 "interest" => null,
                 "company_id" => 1,
-                "email" => "ari@gmail.com"
+                "email" => "ari@gmail.com",
+                "dob" => Carbon::today()->addYears(-20),
+                "phone" => "02321312121"
             ],
             [
                 "first_name" => "Junaedi",
@@ -136,7 +143,9 @@ class UserSeeder extends Seeder
                 "zip" => "10110",
                 "interest" => null,
                 "company_id" => 2,
-                "email" => "junaedi@gmail.com"
+                "email" => "junaedi@gmail.com",
+                "dob" => Carbon::today()->addYears(-20),
+                "phone" => "02321312122"
             ],
         ];
         foreach ($users as $s) {
