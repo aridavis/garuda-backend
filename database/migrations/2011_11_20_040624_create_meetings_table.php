@@ -20,7 +20,6 @@ class CreateMeetingsTable extends Migration
             $table->boolean('started')->default(false);
             $table->string('socket_id')->nullable();
             $table->unsignedBigInteger('interviewer_id')->nullable();
-            $table->foreign('interviewer_id')->on('users')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
