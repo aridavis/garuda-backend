@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Job;
 use App\Models\JobStep;
 use App\Models\ResponseGenerator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -17,19 +20,29 @@ class JobController extends Controller
         return ResponseGenerator::PaginationResponse($data, $request);
     }
 
+    public function companyIndex(Request $request){
+        $data = new Job();
+        $data = $data->newQuery();
+        $data = $data->get();
+        foreach ($data as $d){
+            $d->total = Application::where('job_id', '=', $d->id)->count();
+        }
+
+        return ResponseGenerator::ListResponse($data);
+    }
+
+
     public function store(Request $request){
         $validator = Validator::make($request->all(), [
-            "company_id" => "required|exists:companies,id",
             "name" => "required",
             "description" => "required",
             "category" => "required",
             "pay_range" => "numeric",
             "country" => 'required',
-            "state" => 'required',
             "city" => 'required',
-            "open" => 'required|date|after_or_equal:today',
-            "close" => 'required|date|after_or_equal:open',
-            "steps.*" => 'required|exists:steps,id'
+            // "open" => 'required|date|after_or_equal:today',
+            // "close" => 'required|date|after_or_equal:open',
+            "jobStep.*" => 'required|exists:steps,id'
         ]);
 
         if($validator->fails()){
@@ -37,20 +50,21 @@ class JobController extends Controller
         }
 
         $data = new Job();
-        $data->company_id = $request->company_id;
+        $data->company_id = $request->user()->company_id;
         $data->name = $request->name;
         $data->description = $request->description;
         $data->category = $request->category;
         $data->pay_range = $request->pay_range;
         $data->country = $request->country;
-        $data->state = $request->state;
         $data->city = $request->city;
-        $data->open = $request->open;
-        $data->close = $request->close;
+        $data->open = Carbon::now();
+        $data->close = Carbon::now();
+        // $data->open = $request->open;
+        // $data->close = $request->close;
         $data->save();
 
         $idx = 1;
-        foreach ($request->steps as $i){
+        foreach ($request->jobStep as $i){
             $jobStep = new JobStep();
             $jobStep->job_id = $data->id;
             $jobStep->step_id = $i;

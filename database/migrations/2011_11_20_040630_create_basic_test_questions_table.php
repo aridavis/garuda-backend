@@ -15,7 +15,7 @@ class CreateBasicTestQuestionsTable extends Migration
     {
         Schema::create('basic_test_questions', function (Blueprint $table) {
             $table->id();
-            $table->string('question');
+            $table->longText('question');
             $table->string('a');
             $table->string('b');
             $table->string('c');

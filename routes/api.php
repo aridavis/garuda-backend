@@ -29,6 +29,7 @@ Route::prefix('auth')->group(function(){
 
 Route::middleware('auth:api')->group(function(){
     Route::prefix('applications')->group(function(){
+        Route::get('{id}', [\App\Http\Controllers\ApplicationController::class, 'show']);
         Route::post('filter', [\App\Http\Controllers\ApplicationController::class, 'index']);
         Route::post('store', [\App\Http\Controllers\ApplicationController::class, 'store']);
     });
@@ -44,6 +45,10 @@ Route::middleware('auth:api')->group(function(){
 
     Route::prefix('basic-questions')->group(function(){
         Route::get('/',  [\App\Http\Controllers\BasicQuestionController::class, 'index']);
+    });
+
+    Route::prefix('co')->group(function(){
+        Route::post('jobs/filter', [\App\Http\Controllers\JobController::class, 'companyIndex']);
     });
 });
 
