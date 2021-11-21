@@ -12,4 +12,8 @@ class ApplicationProcess extends Model
     public function jobStep(){
         return $this->belongsTo(JobStep::class);
     }
+
+    public function application(){
+        return $this->belongsTo(Application::class);
+    }
 }

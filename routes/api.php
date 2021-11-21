@@ -35,8 +35,11 @@ Route::middleware('auth:api')->group(function(){
     });
 
     Route::prefix('application-process')->group(function(){
+        Route::get("{id}", [\App\Http\Controllers\ApplicationProcessController::class, 'show']);
         Route::post('cv', [\App\Http\Controllers\ApplicationProcessController::class, 'uploadCv']);
         Route::post('answer', [\App\Http\Controllers\ApplicationProcessController::class, 'answer']);
+        Route::post('pass', [\App\Http\Controllers\ApplicationController::class, 'pass']);
+        Route::post('fail', [\App\Http\Controllers\ApplicationController::class, 'fail']);
     });
 
     Route::prefix('jobs')->group(function(){
@@ -50,6 +53,12 @@ Route::middleware('auth:api')->group(function(){
     Route::prefix('co')->group(function(){
         Route::post('jobs/filter', [\App\Http\Controllers\JobController::class, 'companyIndex']);
         Route::post('jobs/store', [\App\Http\Controllers\JobController::class, 'store']);
+        Route::post("applications/filter", [\App\Http\Controllers\ApplicationController::class, 'companyIndex']);
+    });
+
+    Route::prefix("meeting")->group(function(){
+        Route::get("{id}", [\App\Http\Controllers\MeetingController::class, 'show']);
+        Route::put("{id}", [\App\Http\Controllers\MeetingController::class, 'join']);
     });
 });
 

@@ -21,14 +21,16 @@ class ApplicationController extends Controller
         $data = $data->with('job.company');
         $data = $data->get();
         foreach ($data as $d){
-            $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at')->get();
+            $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at', 'desc')->get();
             $d->last_progress = sizeof($notNull) == 0 ? ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->get()[0] : $notNull[0];
+            $d->done = sizeof(ApplicationProcess::where('application_id', '=', $d->id)->whereNotNull('result')->where('pass', '=', 1)->get()) == sizeof(ApplicationProcess::where('application_id', '=', $d->id)->get());
+            $d->active = sizeof(ApplicationProcess::where('application_id', '=', $d->id)->whereNotNull('result')->where('pass', '=', 0)->get()) == 0;
         }
         return ResponseGenerator::ListResponse($data);
     }
 
     public function show($id){
-        $data = Application::with("job.company")->find($id);
+        $data = Application::with("job.company")->with('user')->find($id);
         $process = ApplicationProcess::with('jobStep.step')->where("application_id", '=', $id)->get();
 
         $last = 0;
@@ -51,7 +53,7 @@ class ApplicationController extends Controller
                         continue;
                     }
                 }
-                $p->status = "upcoming";
+                $p->status = $fail ? "cancelled" : "upcoming";
             }
         }
         $data->process = $process;
@@ -61,18 +63,21 @@ class ApplicationController extends Controller
     public function companyIndex(Request $request){
         $data = new Application();
         $data = $data->newQuery();
-        $data = $data->where('user_id','=', $request->user()->id)->whereIn('job_id', Job::whereIn('company_id', '=', $request->user()->company->id));
+
+        $data = $data->whereIn('job_id', Job::where('company_id', $request->user()->company->id)->pluck('id'));
+        $data = $data->with('job.company');
+        $data = $data->with('user');
         $data = $data->get();
         foreach ($data as $d){
-            $d->total =
-            $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at')->get();
+            $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at', 'desc')->get();
             $d->last_progress = sizeof($notNull) == 0 ? ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->get()[0] : $notNull[0];
+            $d->done = sizeof(ApplicationProcess::where('application_id', '=', $d->id)->whereNotNull('result')->where('pass', '=', 1)->get()) == sizeof(ApplicationProcess::where('application_id', '=', $d->id)->get());
+            $d->active = sizeof(ApplicationProcess::where('application_id', '=', $d->id)->whereNotNull('result')->where('pass', '=', 0)->get()) == 0;
         }
-        return ResponseGenerator::ListResponse($data, $request);
+        return ResponseGenerator::ListResponse($data);
     }
 
     public function store(Request $request){
-
         $data = Application::where('job_id', '=', $request->job_id)->where('user_id', '=', $request->user()->id)->first();
 
         if($data == null){
@@ -106,5 +111,19 @@ class ApplicationController extends Controller
         }
 
 
+    }
+
+    public function pass(Request $request){
+        $data = ApplicationProcess::find($request->application_process_id);
+        $data->pass = 1;
+        $data->result = $request->result;
+        $data->save();
+    }
+
+    public function fail(Request $request){
+        $data = ApplicationProcess::find($request->application_process_id);
+        $data->pass = 0;
+        $data->result = $request->result;
+        $data->save();
     }
 }

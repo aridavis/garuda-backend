@@ -28,6 +28,13 @@ class AuthController extends Controller
                 'message' => 'Unauthorized'
             ], 401);
         $user = $request->user();
+
+        if($user->role_id != 1){
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+        }
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me)
