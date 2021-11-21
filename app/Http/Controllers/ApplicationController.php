@@ -9,6 +9,7 @@ use App\Models\Job;
 use App\Models\JobStep;
 use App\Models\Meeting;
 use App\Models\ResponseGenerator;
+use App\Models\Step;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -93,15 +94,11 @@ class ApplicationController extends Controller
                 $p->order = $j->order;
                 $p->application_id = $data->id;
 
-                if($j->meeting_type_id != null){
-                    $meeting = new Meeting();
-                    $meeting->meeting_type_id = $j->meeting_type_id;
-                    $meeting->save();
-                    $p->meeting_id = $meeting->id;
-                } else {
-                    $p->basic_test_id =  BasicTest::inRandomOrder()->first();
-                }
 
+                $meeting = new Meeting();
+                $meeting->meeting_type_id = $j->step_id == 4 ? 2 : 1;
+                $meeting->save();
+                $p->meeting_id = $meeting->id;
                 $p->save();
             }
 

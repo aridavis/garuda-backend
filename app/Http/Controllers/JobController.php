@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Job;
 use App\Models\JobStep;
+use App\Models\Meeting;
 use App\Models\ResponseGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

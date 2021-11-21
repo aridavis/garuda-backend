@@ -39,7 +39,7 @@ class JobSeeder extends Seeder
                     $j->order = $a;
                     $j->step_id = $i;
                     $a++;
-                    $j->meeting_type_id = $i < 3 ? null : $i == 4 ? 2 : 1;
+                    $j->meeting_type_id = $i == 4 ? 2 : 1;
                     $j->save();
                 }
             } else {
