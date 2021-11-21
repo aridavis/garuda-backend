@@ -35,12 +35,12 @@ Route::middleware('auth:api')->group(function(){
     });
 
     Route::prefix('application-process')->group(function(){
+        Route::post('cv', [\App\Http\Controllers\ApplicationProcessController::class, 'uploadCv']);
         Route::post('answer', [\App\Http\Controllers\ApplicationProcessController::class, 'answer']);
     });
 
     Route::prefix('jobs')->group(function(){
         Route::post('filter', [\App\Http\Controllers\JobController::class, 'index']);
-        Route::post('store', [\App\Http\Controllers\JobController::class, 'store']);
     });
 
     Route::prefix('basic-questions')->group(function(){
@@ -49,6 +49,7 @@ Route::middleware('auth:api')->group(function(){
 
     Route::prefix('co')->group(function(){
         Route::post('jobs/filter', [\App\Http\Controllers\JobController::class, 'companyIndex']);
+        Route::post('jobs/store', [\App\Http\Controllers\JobController::class, 'store']);
     });
 });
 

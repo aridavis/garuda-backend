@@ -24,7 +24,7 @@ class ApplicationController extends Controller
             $notNull = ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->whereNotNull('result')->orderBy('updated_at')->get();
             $d->last_progress = sizeof($notNull) == 0 ? ApplicationProcess::with('jobStep.step')->where('application_id', '=', $d->id)->get()[0] : $notNull[0];
         }
-        return ResponseGenerator::ListResponse($data, $request);
+        return ResponseGenerator::ListResponse($data);
     }
 
     public function show($id){
@@ -37,7 +37,7 @@ class ApplicationController extends Controller
 
         foreach($process as $p){
             $p->name = $p->jobStep->step->name;
-            if($p->pass != null){
+            if($p->result != null){
                 $last++;
                 if($p->pass == false){
                     $fail = 1;
@@ -107,6 +107,4 @@ class ApplicationController extends Controller
 
 
     }
-
-
 }

@@ -18,6 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->unsignedBigInteger('job_id');
             $table->foreign('job_id')->on('jobs')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
+            $table->string('cv_url');
             $table->foreign('user_id')->on('users')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
