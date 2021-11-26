@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return ResponseGenerator::FormikError($validator->errors());
+            return ResponseGenerator::ErrorResponse($validator->errors());
         }
 
         $credentials = request(['email', 'password']);
